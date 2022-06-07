@@ -83,9 +83,10 @@ export default function App() {
         initialRouteName="Welcome"
         screenOptions={{ gestureEnabled: true, headerShown: false }}
       >
-        {user ? (
+        {!user ? (
           <>
             <Stack.Screen name="Connected" component={TabBar} />
+            <Stack.Screen name="Dialogue" component={Dialogue} />
           </>
         ) : (
           <>

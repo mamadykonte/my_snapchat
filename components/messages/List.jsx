@@ -9,7 +9,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Ionicons } from "@expo/vector-icons";
 
-const List = () => {
+const List = ({ navigation }) => {
   const [data, setData] = useState([]);
 
   const fetchData = async () => {
@@ -20,42 +20,49 @@ const List = () => {
           token: "ohcu932SPYNuARbBprkcwzb4",
         },
       });
-    
-      setData(response.data.data);
+
+      // setData(response.data.data);
+      const key = "from";
+
+      const distinct = [
+        ...new Map(
+          response.data.data.map((item) => [item[key], item])
+        ).values(),
+      ];
+
+      console.log("distinct", distinct);
+      setData(distinct);
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
     fetchData();
-    console.log("dataUsers", data);
   }, []);
 
-  const [msg] = useState([
-    { id: 1, from: "Mom", content: "How are you" },
-    { id: 2, from: "Dad", content: "Hello Ryan" },
-    { id: 3, from: "Brother1", content: "Can I borrow $10" },
-    { id: 4, from: "Brother2", content: "Can I borrow $2000" },
-    { id: 5, from: "Dog", content: "Bark Bark" },
-    { id: 6, from: "Cat", content: "Meow Meow" },
-  ]);
+  const getSnap = (from) => {
+    navigation.navigate("Dialogue", { from: from });
+  };
 
   const renderMessage = (item) => {
     return (
       <View style={styles.message}>
-        <View style={styles.item}>
+        <TouchableOpacity
+          style={styles.item}
+          onPress={() => getSnap(item.from)}
+        >
           <Ionicons name="person" size={30} color="#fff"></Ionicons>
           <Text
             style={[
               styles.messageText,
-              { paddingLeft: 10, fontWeight: "bold" },
+              { paddingLeft: 15, fontWeight: "bold" },
             ]}
           >
             {item.from}
           </Text>
-        </View>
-        <TouchableOpacity>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={()=>navigation.navigate("Home")}>
           <Ionicons name="camera" size={30} color="#fff"></Ionicons>
         </TouchableOpacity>
       </View>
@@ -66,9 +73,9 @@ const List = () => {
     <View style={styles.centeredView}>
       <FlatList
         style={styles.main}
-        data={msg}
+        data={data}
         renderItem={({ item }) => renderMessage(item)}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item.snap_id}
       />
     </View>
   );
@@ -81,18 +88,20 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: "5%",
   },
-
   message: {
     color: "white",
     width: "100%",
     borderBottomWidth: 1,
     justifyContent: "space-between",
     flexDirection: "row",
+    alignItems: "center",
+    alignContent: "center",
     padding: 15,
+    // backgroundColor:"red"
   },
   item: {
     flexDirection: "row",
-    alignItems: "flex-end",
+    alignItems: "center",
     justifyContent: "space-between",
   },
   messageText: {
