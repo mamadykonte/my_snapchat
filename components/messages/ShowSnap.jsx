@@ -35,9 +35,9 @@ const ShowSnap = ({ snapId }) => {
   };
 
   useEffect(() => {
-      fetchSnap();
+    fetchSnap();
     console.log(snapPath, "path");
-  }, []);
+  }, [snapPath]);
   return (
     <View style={[styles.centeredView, styles.container]}>
       <Modal
