@@ -3,13 +3,17 @@ import React, { useState, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import ShowSnap from "./ShowSnap";
 import axios from "axios";
+import { useAuth } from "../auth/AuthContext";
 
 const ClickViewMsg = ({ snapId }) => {
 //   const [snapPath, setSnapPath] = useState(null);
 
-    
+  const [user, setUser] = useAuth();
+  
     const fetchSnap = async () => {
-      let token = "ohcu932SPYNuARbBprkcwzb4";
+      // let token = "ohcu932SPYNuARbBprkcwzb4";
+      let token = user.token;
+
       const config = {
         headers: {
           token: token,
@@ -31,7 +35,7 @@ const ClickViewMsg = ({ snapId }) => {
     //   });
     };
         
-  return <ShowSnap snapId={snapId} />;
+  return <ShowSnap snapId={snapId} token={user.token}  />;
 };
 export default ClickViewMsg;
 

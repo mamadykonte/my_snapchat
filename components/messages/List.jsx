@@ -7,17 +7,22 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useAuth } from "../auth/AuthContext";
 import { Ionicons } from "@expo/vector-icons";
+
 
 const List = ({ navigation }) => {
   const [data, setData] = useState([]);
+  const [user, setUser] = useAuth();
 
-  const fetchData = async () => {
+  const fetchData = async (token) => {
+    
+    // console.log('user', user.token);
     // if (user.token) {
     try {
       const response = await axios.get("http://snapi.epitech.eu:8000/snaps", {
         headers: {
-          token: "ohcu932SPYNuARbBprkcwzb4",
+          token: token,
         },
       });
 
@@ -38,7 +43,7 @@ const List = ({ navigation }) => {
   };
 
   useEffect(() => {
-    fetchData();
+    fetchData(user.token);
   }, []);
 
   const getSnap = (from) => {

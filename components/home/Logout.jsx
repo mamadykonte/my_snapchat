@@ -2,8 +2,8 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { removeToken } from "../storage/token";
 import { useAuth } from "../auth/AuthContext";
-const Logout = () => {
 
+const Logout = () => {
   const [user, setUser] = useAuth();
 
   const deleteToken = async () => {

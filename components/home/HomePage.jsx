@@ -163,7 +163,7 @@ export default function HomePage({navigation}) {
         {videoSource && <VideoPlayer videoSource={videoSource} />}
         {isPreview && <CancelPreviewButton cancelPreview={cancelPreview} />}
         {isPreview && (
-          <SendSnapBar cancelPreview={cancelPreview} path={path} time={time} />
+          <SendSnapBar cancelPreview={cancelPreview} path={path} time={time} navigation={navigation} />
         )}
         {!videoSource && !isPreview && (
           <CaptureControl

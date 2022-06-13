@@ -11,14 +11,13 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-const ShowSnap = ({ snapId }) => {
+const ShowSnap = ({ snapId,token }) => {
   const [modalVisible, setModalVisible] = useState(false);
     const [snapPath, setSnapPath] = useState(null);
     const [duration, setDuration] = useState(null);
     const [load, setLoad] = useState(true);
 
-  const fetchSnap = async () => {
-    let token = "ohcu932SPYNuARbBprkcwzb4";
+  const fetchSnap = async (token) => {
     const config = {
       headers: {
         token: token,

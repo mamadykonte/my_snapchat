@@ -11,7 +11,8 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-const Item = ({ email, path,token,time }) => {
+
+const Item = ({ email, path, token, time, navigation }) => {
   const name = email.split("@")[0];
   const envoie = () => {
     console.log("snap envoyer a " + email);
@@ -44,7 +45,7 @@ const Item = ({ email, path,token,time }) => {
         console.log(error);
       });
 
-    //   navigate("message");
+    navigation.navigate("Dialogue");
   };
 
   return (
@@ -66,14 +67,14 @@ const Item = ({ email, path,token,time }) => {
 const List = (props) => {
   const renderItem = ({ item }) => {
     if (props.searchPhrase === "") {
-      return <Item email={item.email} path={props.path} token={props.token}  time={props.time} />;
+      return <Item email={item.email} path={props.path} token={props.token}  time={props.time} navigation={props.navigation}/>;
     }
     if (
       item.email
         .toUpperCase()
         .includes(props.searchPhrase.toUpperCase().trim().replace(/\s/g, ""))
     ) {
-      return <Item email={item.email} path={props.path} token={props.token} time={props.time} />;
+      return <Item email={item.email} path={props.path} token={props.token} time={props.time} navigation={props.navigation}/>;
     }
   };
 

@@ -3,7 +3,7 @@ import { AntDesign } from "@expo/vector-icons";
 
 import SendSnap from "./SendSnap";
 
-const sendSnapBar = ({ cancelPreview, path, time }) => (
+const sendSnapBar = ({ cancelPreview, path, time, navigation }) => (
   <View style={styles.containerCapture}>
     <View style={styles.files}>
       <TouchableOpacity
@@ -16,7 +16,7 @@ const sendSnapBar = ({ cancelPreview, path, time }) => (
         <AntDesign name="addfile" color="white" size={20} />
       </TouchableOpacity>
     </View>
-    <SendSnap path={path} time={time} />
+    <SendSnap path={path} time={time} navigation={navigation} />
   </View>
 );
 export default sendSnapBar;

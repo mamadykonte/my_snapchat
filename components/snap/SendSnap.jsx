@@ -18,7 +18,7 @@ import SendSearchBar from "./SendSearchBar";
 import UserList from "../user/list";
 import { useAuth } from "../auth/AuthContext";
 
-const SendSnap = ({ path, time }) => {
+const SendSnap = ({ path, time, navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const [searchPhrase, setSearchPhrase] = useState("");
@@ -27,10 +27,10 @@ const SendSnap = ({ path, time }) => {
   const [token, setToken] = useState(null);
   const [user] = useAuth();
 
-  // useEffect(() => {
-  //   data();
-  //   console.log("useEffect", user.token);
-  // }, []);
+  useEffect(() => {
+    data();
+    console.log("useEffect", user.token);
+  }, []);
 
   const data = async () => {
     try {
@@ -88,6 +88,7 @@ const SendSnap = ({ path, time }) => {
                 token={token}
                 path={path}
                 time={time}
+                navigation={navigation}
               />
             )}
           </View>
